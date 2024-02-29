@@ -1,6 +1,6 @@
-package com.tinkoff.android_homework.data.services
+package com.tinkoff.android_homework.data.network.services
 
-import com.tinkoff.android_homework.data.entities.operations.Operations
+import com.tinkoff.android_homework.data.network.entities.operations.Operations
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

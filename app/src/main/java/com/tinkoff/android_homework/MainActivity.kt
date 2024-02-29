@@ -3,9 +3,12 @@ package com.tinkoff.android_homework
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.room.Room
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.tinkoff.android_homework.data.entities.operations.Operations
-import com.tinkoff.android_homework.data.services.OperationService
+import com.tinkoff.android_homework.data.network.entities.operations.Operations
+import com.tinkoff.android_homework.data.network.services.OperationService
+import com.tinkoff.android_homework.data.storage.database.AppDatabase
+import com.tinkoff.android_homework.data.storage.database.AppDatabase.Companion.DATABASE_NAME
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -14,12 +17,18 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
+import java.util.Random
 
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, DATABASE_NAME
+        ).build()
 
         getOperations()
     }

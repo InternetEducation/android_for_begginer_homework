@@ -1,4 +1,4 @@
-package com.tinkoff.android_homework.data.entities.operations
+package com.tinkoff.android_homework.data.network.entities.operations
 
 import kotlinx.serialization.Serializable
 
