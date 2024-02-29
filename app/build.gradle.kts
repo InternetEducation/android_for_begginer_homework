@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
+    alias(libs.plugins.navigation.safeargs)
 }
 
 android {
@@ -75,6 +76,7 @@ dependencies {
     // Jetpack Navigation
     implementation(libs.navigation.graph.fragment)
     implementation(libs.navigation.graph.ui)
+    implementation(libs.navigation.graph.safeargs)
 
     // Hilt
     kapt(libs.hilt.compiler)
