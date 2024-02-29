@@ -5,6 +5,7 @@ plugins {
     alias(libs.plugins.pluginSerialization)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kapt)
 }
 
 android {
@@ -76,8 +77,8 @@ dependencies {
     implementation(libs.navigation.graph.ui)
 
     // Hilt
-    ksp(libs.hilt.compiler)
-    ksp(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(libs.hilt.android)
 
     // KSP
     implementation(libs.ksp.symbol.processing)
