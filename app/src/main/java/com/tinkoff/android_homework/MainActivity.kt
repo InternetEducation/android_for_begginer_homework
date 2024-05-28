@@ -1,14 +1,19 @@
 package com.tinkoff.android_homework
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import com.tinkoff.android_homework.data.network.entities.operations.Operations
 import com.tinkoff.android_homework.data.network.services.OperationService
 import com.tinkoff.android_homework.data.storage.database.AppDatabase
 import com.tinkoff.android_homework.data.storage.database.AppDatabase.Companion.DATABASE_NAME
+import com.tinkoff.android_homework.presentation.adapter.OperationAdapter
+import com.tinkoff.android_homework.presentation.model.OperationItem
+import com.tinkoff.android_homework.presentation.model.OperationType
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -17,7 +22,6 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
-import java.util.Random
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,6 +35,9 @@ class MainActivity : AppCompatActivity() {
         ).build()
 
         getOperations()
+
+        initStatisticCard()
+        initOperationList()
     }
 
     private fun getOperations() {
@@ -53,19 +60,42 @@ class MainActivity : AppCompatActivity() {
 
         call.enqueue(object : Callback<Operations> {
 
-                override fun onResponse(call: Call<Operations>, response: Response<Operations>) {
-                    if (response.isSuccessful) {
-                        val operations = response.body()
-                        Log.i(TAG, "Operations: $operations")
-                    } else {
-                        // Обработка ошибки
-                    }
-                }
-
-                override fun onFailure(call: Call<Operations>, t: Throwable) {
+            override fun onResponse(call: Call<Operations>, response: Response<Operations>) {
+                if (response.isSuccessful) {
+                    val operations = response.body()
+                    Log.i(TAG, "Operations: $operations")
+                } else {
                     // Обработка ошибки
                 }
             }
+
+            override fun onFailure(call: Call<Operations>, t: Throwable) {
+                // Обработка ошибки
+            }
+        }
+        )
+    }
+
+    private fun initStatisticCard() {
+        // TODO Вывести статистику
+    }
+
+    private fun initOperationList() {
+        val operationRecyclerView = findViewById<RecyclerView>(R.id.operations_recycler)
+        val operationAdapter = OperationAdapter()
+
+        operationRecyclerView.layoutManager = LinearLayoutManager(this)
+        operationRecyclerView.adapter = operationAdapter
+
+        // TODO Заменить на реальные данные
+        operationAdapter.data = listOf(
+            OperationItem(OperationType.SPENDING, "Тест", "- 5 0000 Р"),
+            OperationItem(OperationType.INCOME, "Тест", "+ 5 0000 Р"),
+            OperationItem(OperationType.SPENDING, "Тест", "- 5 0000 Р"),
+            OperationItem(OperationType.INCOME, "Тест", "+ 5 0000 Р"),
+            OperationItem(OperationType.INCOME, "Тест", "+ 5 0000 Р"),
+            OperationItem(OperationType.SPENDING, "Тест", "- 5 0000 Р")
+
         )
     }
 
