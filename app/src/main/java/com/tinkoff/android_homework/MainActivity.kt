@@ -14,6 +14,7 @@ import com.tinkoff.android_homework.data.storage.database.AppDatabase.Companion.
 import com.tinkoff.android_homework.presentation.adapter.OperationAdapter
 import com.tinkoff.android_homework.presentation.model.OperationItem
 import com.tinkoff.android_homework.presentation.model.OperationType
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
@@ -23,6 +24,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
