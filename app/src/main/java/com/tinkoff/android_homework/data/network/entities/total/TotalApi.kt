@@ -7,6 +7,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class TotalApi(
-    val outcome: Int,
-    val income: Int,
+    val id: Int,
+    val total: Int
 )

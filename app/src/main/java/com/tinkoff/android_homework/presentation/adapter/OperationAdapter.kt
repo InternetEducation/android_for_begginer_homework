@@ -7,8 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tinkoff.android_homework.R
-import com.tinkoff.android_homework.presentation.model.OperationItem
-import com.tinkoff.android_homework.presentation.model.OperationType
+import com.tinkoff.android_homework.presentation.model.operations.OperationItem
+import com.tinkoff.android_homework.presentation.model.operations.OperationType
 
 /**
  * @author d.a.korotkov
@@ -32,13 +32,13 @@ class OperationAdapter : RecyclerView.Adapter<OperationAdapter.OperationViewHold
     override fun onBindViewHolder(holder: OperationViewHolder, position: Int) {
         data[position].let { operationItem ->
             val operationIcon = when (operationItem.operationType) {
-                OperationType.SPENDING -> R.drawable.spending_icon
+                OperationType.OUTCOME -> R.drawable.spending_icon
                 OperationType.INCOME -> R.drawable.income_icon
             }
             holder.operationIcon.setImageResource(operationIcon)
 
             holder.operationTitle.text = operationItem.operationTitle
-            holder.operationSum.text = operationItem.operationSum
+            holder.operationSum.text = operationItem.operationSum.toString()
         }
     }
 

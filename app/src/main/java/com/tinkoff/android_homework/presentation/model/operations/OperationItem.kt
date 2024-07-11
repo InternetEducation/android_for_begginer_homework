@@ -1,4 +1,4 @@
-package com.tinkoff.android_homework.presentation.model
+package com.tinkoff.android_homework.presentation.model.operations
 
 /**
  * @author d.a.korotkov
@@ -6,5 +6,5 @@ package com.tinkoff.android_homework.presentation.model
 data class OperationItem(
     val operationType: OperationType,
     val operationTitle: String,
-    val operationSum: String
+    val operationSum: Int
 )

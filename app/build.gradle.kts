@@ -3,10 +3,10 @@ plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.kotlinAndroid)
     alias(libs.plugins.pluginSerialization)
+
     alias(libs.plugins.ksp)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.kapt)
-//    alias(libs.plugins.navigation.safeargs)
+    alias(libs.plugins.hilt)
 }
 
 android {
@@ -42,12 +42,16 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
+
+//    buildFeatures {
+//        viewBinding = true
+//    }
 }
 
 dependencies {
@@ -57,6 +61,7 @@ dependencies {
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
+    implementation(libs.view.binding)
 
     // Retrofit
     implementation(libs.retrofit)
@@ -79,8 +84,8 @@ dependencies {
 //    implementation(libs.navigation.graph.safeargs)
 
     // Hilt
-    kapt(libs.hilt.compiler)
     implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 
     // KSP
     implementation(libs.ksp.symbol.processing)
@@ -90,3 +95,7 @@ dependencies {
     androidTestImplementation(libs.androidx.test.ext.junit)
     androidTestImplementation(libs.espresso.core)
 }
+
+//kapt {
+//    correctErrorTypes = true
+//}
