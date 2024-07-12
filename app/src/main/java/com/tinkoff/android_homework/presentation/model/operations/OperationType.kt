@@ -8,7 +8,6 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 enum class OperationType {
-    @Serializable
     @SerialName("OUTCOME")
     OUTCOME,
     @SerialName("INCOME")

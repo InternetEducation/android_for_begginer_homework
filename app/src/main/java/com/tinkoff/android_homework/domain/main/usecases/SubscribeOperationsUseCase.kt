@@ -15,6 +15,7 @@ interface SubscribeOperationsUseCase {
 class SubscribeOperationsUseCaseImpl @Inject constructor(
     private val repository: OperationsRepository
 ) : SubscribeOperationsUseCase {
+
     override suspend fun invoke(): Operations {
         return repository.getOperations()
     }

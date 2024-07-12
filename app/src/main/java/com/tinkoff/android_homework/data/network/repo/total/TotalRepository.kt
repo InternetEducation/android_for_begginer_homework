@@ -1,6 +1,7 @@
 package com.tinkoff.android_homework.data.network.repo.total
 
 import com.tinkoff.android_homework.data.network.mappers.total.TotalApiToDbMapper
+import com.tinkoff.android_homework.data.network.repo.utils.InternetChecker
 import com.tinkoff.android_homework.data.network.services.TotalService
 import com.tinkoff.android_homework.data.storage.dao.TotalDao
 import com.tinkoff.android_homework.data.storage.mappers.total.TotalDbToDomainMapper
@@ -22,13 +23,15 @@ class TotalRepositoryImpl @Inject constructor(
     private val totalDao: TotalDao,
     private val totalService: TotalService,
     private val totalApiToDbMapper: TotalApiToDbMapper,
-    private val totalDbToDomainMapper: TotalDbToDomainMapper
+    private val totalDbToDomainMapper: TotalDbToDomainMapper,
+    private val internetChecker: InternetChecker,
 ) : TotalRepository {
 
     override suspend fun subscribeTotal(): Flow<Total> {
-        val totalApi = totalService.getTotal()
-        totalDao.insert(totalApiToDbMapper.invoke(totalApi))
-
-        return totalDao.getAll().map { totalDbToDomainMapper.invoke(it)}
+        if (internetChecker.isInternetAvailable()) {
+            val totalApi = totalService.getTotal()
+            totalDao.insert(totalApiToDbMapper.invoke(totalApi))
+        }
+        return totalDao.getAll().map { totalDbToDomainMapper.invoke(it) }
     }
 }

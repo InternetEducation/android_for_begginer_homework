@@ -1,5 +1,6 @@
 package com.tinkoff.android_homework.domain.main.usecases
 
+import com.tinkoff.android_homework.data.network.repo.detail.DetailRepository
 import com.tinkoff.android_homework.data.network.repo.total.TotalRepository
 import com.tinkoff.android_homework.domain.main.entities.Total
 import dagger.hilt.android.HiltAndroidApp
@@ -16,10 +17,10 @@ interface SubscribeTotalUseCase {
 }
 
 class SubscribeTotalUseCaseImpl @Inject constructor(
-    private val repository: TotalRepository
-): SubscribeTotalUseCase {
+    private val repository: TotalRepository,
+) : SubscribeTotalUseCase {
 
-    override suspend fun invoke(): Flow<Total> {
-        return repository.subscribeTotal()
+    override suspend fun invoke(): Flow<Total>{
+        return SubscribeTotalUseCaseImpl(repository).invoke()
     }
 }

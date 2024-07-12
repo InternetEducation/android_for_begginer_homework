@@ -1,6 +1,7 @@
 package com.tinkoff.android_homework.di
 
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import com.tinkoff.android_homework.data.network.services.DetailService
 import com.tinkoff.android_homework.data.network.services.OperationsService
 import com.tinkoff.android_homework.data.network.services.TotalService
 import dagger.Module
@@ -49,6 +50,10 @@ object ApplicationModule {
         return retrofit.create(OperationsService::class.java)
     }
 
+    @Provides
+    fun provideDetailService(retrofit: Retrofit): DetailService {
+        return retrofit.create(DetailService::class.java)
+    }
 
     val BASE_URL = "https://raw.githubusercontent.com/InternetEducation/"
 }
