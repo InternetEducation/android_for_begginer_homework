@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                 totalSum.text = totalItem?.total.toString()
 
                 Log.e("TAGRTRT", "totalItem?.progress :${totalItem?.progress}")
-                progressBar.setProgress(totalItem?.progress?.toInt() ?: 0)
+                progressBar.progress = totalItem?.progress?.toInt() ?: 0
             }
         }
     }

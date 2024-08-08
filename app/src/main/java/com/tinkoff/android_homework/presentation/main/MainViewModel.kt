@@ -1,9 +1,7 @@
 package com.tinkoff.android_homework.presentation.main
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.tinkoff.android_homework.domain.main.entities.Total
 import com.tinkoff.android_homework.domain.main.usecases.SubscribeOperationsUseCase
 import com.tinkoff.android_homework.domain.main.usecases.SubscribeTotalUseCase
 import com.tinkoff.android_homework.presentation.mappers.operations.OperationToUiItemMapper
@@ -15,8 +13,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.flatMap
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -48,7 +44,6 @@ class MainViewModel @Inject constructor(
             _total.value = subscribeTotalUseCase
                 .invoke()
                 .map { total ->
-
                     val incomes = _operations
                         .value
                         .filter { it.operationType == OperationType.INCOME }
@@ -65,10 +60,9 @@ class MainViewModel @Inject constructor(
                         total = total.amount,
                         income = incomes,
                         outcome = outcomes,
-                        progress = progress.toFloat()
+                        progress = progress
                     )
                 }.first()
-
         }
     }
 }
